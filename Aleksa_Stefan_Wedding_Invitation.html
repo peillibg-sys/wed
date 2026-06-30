@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="bg"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aleksa & Stefan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Pinyon+Script&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Montserrat,sans-serif;background:#fffdf8;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background:linear-gradient(rgba(255,255,255,.88),rgba(255,255,255,.9)),url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1600&q=80') center/cover;z-index:-2}
+.petals{position:fixed;inset:0;pointer-events:none}.petal{position:absolute;top:-30px;width:18px;height:18px;background:#d84c70;border-radius:60% 40% 60% 40%;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(110vh) rotate(600deg) translateX(60px)}}
+.card{max-width:900px;margin:6vh auto;background:rgba(255,255,255,.75);backdrop-filter:blur(10px);padding:50px;border-radius:24px;position:relative;text-align:center;box-shadow:0 15px 40px rgba(0,0,0,.2)}
+.card:before{content:"";position:absolute;inset:-3px;border-radius:26px;padding:3px;background:linear-gradient(90deg,#b78b2f,#f7e6a0,#b78b2f,#fff0b3,#b78b2f);background-size:300% 300%;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:gold 6s linear infinite}
+@keyframes gold{0%{background-position:0%}100%{background-position:300%}}
+.names{font:80px 'Pinyon Script';color:#b78b2f}.subtitle{font-family:Cinzel;letter-spacing:5px;color:#8c6b25}.invite{font-size:22px;line-height:1.8}.btn{padding:16px 40px;border:none;border-radius:40px;background:#c8a040;color:#fff;font-size:18px;cursor:pointer}
+#count{font-size:28px;color:#8c6b25;margin:20px 0;font-family:Cinzel}
+#musicBtn{position:fixed;top:20px;right:20px;padding:10px 16px;border-radius:25px;border:none;background:#b78b2f;color:#fff;cursor:pointer}
+</style></head><body>
+<button id="musicBtn">🔇 Music</button>
+<audio id="music" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+<div class="petals"></div>
+<div class="card">
+<div class="names">Aleksa &amp; Stefan</div>
+<div class="subtitle">СВАТБЕНО ТЪРЖЕСТВО</div>
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Bride_and_Groom_silhouette.svg" width="250">
+<p class="invite">Много се радваме да Ви поканим на нашата сватба.<br><br>Ще бъде чест да присъствате и да споделите този специален ден с нас.</p>
+<div id="count"></div>
+<button class="btn">Продължи</button>
+</div>
+<script>
+for(let i=0;i<40;i++){let p=document.createElement('div');p.className='petal';p.style.left=Math.random()*100+'vw';p.style.animationDuration=(6+Math.random()*8)+'s';p.style.animationDelay=(Math.random()*6)+'s';document.querySelector('.petals').appendChild(p);}
+const wedding=new Date("2027-06-19T16:00:00");
+function tick(){let d=wedding-new Date();if(d<0){count.innerHTML="Днес е сватбата!";return;}let days=Math.floor(d/86400000),hrs=Math.floor(d%86400000/3600000),min=Math.floor(d%3600000/60000),sec=Math.floor(d%60000/1000);count.innerHTML=`Остават <b>${days}</b> дни ${hrs}ч ${min}м ${sec}с`;}
+setInterval(tick,1000);tick();
+const a=document.getElementById('music'),b=document.getElementById('musicBtn');let on=false;
+b.onclick=()=>{if(!on){a.play();b.textContent="🔊 Music";}else{a.pause();b.textContent="🔇 Music";}on=!on;}
+</script></body></html>
